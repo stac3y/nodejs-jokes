@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-jokes",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node ."
+  },
+  "author": "stac3y",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "express": "^4.17.1"
+  }
+}
