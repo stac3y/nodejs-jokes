@@ -1,17 +1,16 @@
-import express from 'express'
-import axios from 'axios'
+import { Command } from 'commander'
 
-const app = express();
-const port = 3000;
+import { Joke } from './classes/joke'
 
-app.get('/', ((req, res) => {
-    let data : object;
-    axios.get('https://v2.jokeapi.dev/joke/Any')
-        .then(res => {
-           data = <object>res.data;
-            console.log(data)
-        });
-    res.send(data)
-}))
+const program = new Command()
 
-app.listen(port, () => console.log(`Running on port ${port}`));
+program.version('1.0.0').description('Configuration files creator.')
+program.option('-r, --random', 'output random joke')
+
+program.parse(process.argv)
+
+const options = program.opts()
+if (options.random) {
+    const joke = Joke.getRandomJoke()
+    console.log(joke)
+}
