@@ -11,6 +11,7 @@ program.parse(process.argv)
 
 const options = program.opts()
 if (options.random) {
-    const joke = Joke.getRandomJoke()
-    console.log(joke)
+    Joke.getRandomJoke().then((joke) => {
+        console.log(joke)
+    })
 }
