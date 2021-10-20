@@ -18,4 +18,23 @@ export class Joke {
                 console.log(err)
             })
     }
+
+    static checkCategory(category: string): boolean {
+        const categories = [
+            'Any',
+            'Programming',
+            'Misc',
+            'Dark',
+            'Pun',
+            'Spooky',
+            'Christmas',
+        ]
+        const index = categories.indexOf(category)
+        if (index === -1) {
+            console.log(
+                `There is no such category. Possible categories: ${categories}`,
+            )
+            return false
+        } else return true
+    }
 }

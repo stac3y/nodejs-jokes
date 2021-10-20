@@ -18,6 +18,8 @@ program
         const category = options.category
         const mode = options.mode
 
+        if (!Joke.checkCategory(category)) return
+
         if (mode === 'async') {
             Joke.getJokeWithAsync(category)
                 .then((joke) => {
@@ -34,7 +36,7 @@ program
                 .catch((err) => {
                     console.log(err)
                 })
-        }
+        } else console.log('There are only 2 modes: async and promise.')
     })
 
 program.parse(process.argv)
