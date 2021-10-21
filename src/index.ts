@@ -24,7 +24,7 @@ program
         if (mode === 'async') {
             Joke.getJokeWithAsync(category)
                 .then((joke) => {
-                    console.log(joke)
+                    console.log('\x1b[32m%s\x1b[0m', joke)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -32,7 +32,7 @@ program
         } else if (mode === 'promise') {
             Joke.getJokeWithPromise(category)
                 .then((joke) => {
-                    console.log(joke)
+                    console.log('\x1b[32m%s\x1b[0m', joke)
                 })
                 .catch((err) => {
                     console.log(err)

@@ -17,11 +17,11 @@ export async function asyncTest(n: number) {
     }
     Promise.all(promises).then((jokes) => {
         jokes.forEach((joke) => {
-            console.log(`${joke}\n`)
+            console.log('\x1b[32m%s\x1b[0m', `${joke}\n`)
         })
         const endTime = performance.now()
         const time = endTime - beginTime
-        console.log(`${time}\n`)
+        console.log('\x1b[36m%s\x1b[0m', `${time}\n`)
     })
 }
 
@@ -35,9 +35,9 @@ export async function syncTest(n: number) {
     const beginTime = performance.now()
     for (i = 0; i < n; i++) {
         const joke = await Joke.getJokeWithAsync()
-        console.log(`${joke}\n`)
+        console.log('\x1b[32m%s\x1b[0m', `${joke}\n`)
     }
     const endTime = performance.now()
     const time = endTime - beginTime
-    console.log(`${time}\n`)
+    console.log('\x1b[36m%s\x1b[0m', `${time}\n`)
 }
