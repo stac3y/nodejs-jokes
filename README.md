@@ -21,7 +21,7 @@ If category is undefined application will output random joke. If the category is
   There is no such category. Possible categories: Any,Programming,Misc,Dark,Pun,Spooky,Christmas
 ```  
 Mode can be async or promise, async is default. 
-### Example:  
+### Example  
 ```bash
   node . get-joke -c Programming -m promise  
   
