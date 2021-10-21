@@ -1,32 +1,43 @@
-import { Command } from 'commander'
+import { performance } from 'perf_hooks'
 
 import { Joke } from '../src/classes/joke'
 
-const program = new Command()
-
-program.version('1.0.0').description('Console application for test.')
-program
-    .command('test')
-    .option(
-        '-m, --mode <mode>',
-        '2 modes: async and sync, async is default',
-        'async',
-    )
-    .option('-n, --number <number>', 'number of iterations')
-    .description('A command for getting jokes')
-    .action((options) => {
-        const mode = options.mode
-        const n: number = options.number
-
-        if (!n || n < 1) {
-            console.log('Number of iterations must not be null or string!')
-            return
-        }
-        if (mode === 'async') {
-            Joke.asyncTest(n)
-        } else if (mode === 'sync') {
-            Joke.syncTest(n)
-        } else console.log('There are only 2 modes: async and sync.')
+/**
+ * Function for running async test with promises
+ *
+ * @param n - number of iterations
+ */
+export async function asyncTest(n: number) {
+    let i: number = 0
+    let promises: Array<Promise<string>> = []
+    const beginTime = performance.now()
+    for (i = 0; i < n; i++) {
+        const promise = Joke.getJokeWithAsync()
+        promises.push(promise)
+    }
+    Promise.all(promises).then((jokes) => {
+        jokes.forEach((joke) => {
+            console.log(`${joke}\n`)
+        })
+        const endTime = performance.now()
+        const time = endTime - beginTime
+        console.log(`${time}\n`)
     })
+}
 
-program.parse(process.argv)
+/**
+ * Function for running sync test
+ *
+ * @param n - number of iterations
+ */
+export async function syncTest(n: number) {
+    let i: number = 0
+    const beginTime = performance.now()
+    for (i = 0; i < n; i++) {
+        const joke = await Joke.getJokeWithAsync()
+        console.log(`${joke}\n`)
+    }
+    const endTime = performance.now()
+    const time = endTime - beginTime
+    console.log(`${time}\n`)
+}
