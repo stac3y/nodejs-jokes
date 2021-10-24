@@ -21,7 +21,7 @@ export async function asyncTest(n: number) {
         })
         const endTime = performance.now()
         const time = endTime - beginTime
-        console.log('\x1b[36m%s\x1b[0m', `${time}\n`)
+        console.log('\x1b[36m%s\x1b[0m', `${time} ms\n`)
     })
 }
 
@@ -43,5 +43,5 @@ export async function syncTest(n: number) {
     }
     const endTime = performance.now()
     const time = endTime - beginTime
-    console.log('\x1b[36m%s\x1b[0m', `${time}\n`)
+    console.log('\x1b[36m%s\x1b[0m', `${time} ms\n `)
 }
