@@ -8,10 +8,14 @@ export class Joke {
      * @returns promise with a joke
      */
     static async getJokeWithAsync(category: string = 'Any'): Promise<string> {
-        const res = await axios.get(
-            `https://v2.jokeapi.dev/joke/${category}?type=single`,
-        )
-        return res.data['joke']
+        try {
+            const res = await axios.get(
+                `https://v2.jokeapi.dev/joke/${category}?type=single`,
+            )
+            return res.data['joke']
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     /**

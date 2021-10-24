@@ -34,8 +34,12 @@ export async function syncTest(n: number) {
     let i: number = 0
     const beginTime = performance.now()
     for (i = 0; i < n; i++) {
-        const joke = await Joke.getJokeWithAsync()
-        console.log('\x1b[32m%s\x1b[0m', `${joke}\n`)
+        try {
+            const joke = await Joke.getJokeWithAsync()
+            console.log('\x1b[32m%s\x1b[0m', `${joke}\n`)
+        } catch (err) {
+            console.log(err)
+        }
     }
     const endTime = performance.now()
     const time = endTime - beginTime

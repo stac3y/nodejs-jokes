@@ -40,7 +40,7 @@ program
         } else console.log('There are only 2 modes: async and promise.')
     })
 
-    program
+program
     .command('test')
     .option(
         '-m, --mode <mode>',
