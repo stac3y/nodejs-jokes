@@ -10,9 +10,11 @@ export class Joke {
     static async getJokeWithAsync(category: string = 'Any'): Promise<string> {
         try {
             const res = await axios.get(
-                `https://v2.jokeapi.dev/joke/${category}?type=single`,
+                `https://v2.jokeapi.dev/joke/${category}`,
             )
-            return res.data['joke']
+            return res.data['type'] === 'single'
+                ? res.data['joke']
+                : `${res.data['setup']} \n${res.data['delivery']}`
         } catch (err) {
             console.error(err)
         }
@@ -26,9 +28,11 @@ export class Joke {
      */
     static getJokeWithPromise(category: string = 'Any'): Promise<string> {
         return axios
-            .get(`https://v2.jokeapi.dev/joke/${category}?type=single`)
+            .get(`https://v2.jokeapi.dev/joke/${category}`)
             .then((res) => {
-                return res.data['joke']
+                return res.data['type'] === 'single'
+                    ? res.data['joke']
+                    : `${res.data['setup']} \n${res.data['delivery']}`
             })
             .catch((err) => {
                 console.log(err)
